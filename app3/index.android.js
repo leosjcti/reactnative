@@ -30,38 +30,35 @@ class app3 extends Component {
 
         var resultado = '';
 
-        if(escolhaComputadorTexto == 'pedra'){
-            if(acao == 'pedra'){
+        if (escolhaComputadorTexto === 'pedra') {
+            if (acao === 'pedra') {
                 resultado = 'empate';
             }
-            if(acao == 'papel'){
-                resultado = 'usuario ganhou';
-            }
-            else{
-                resultado = 'computador ganhou';
+            if (acao === 'papel') {
+                resultado = 'Você ganhou';
+            } else {
+                resultado = 'Você perdeu';
             }
         }
 
-        if(escolhaComputadorTexto == 'papel'){
-            if(acao == 'pedra'){
-                resultado = 'computador ganhou';
+        if (escolhaComputadorTexto === 'papel') {
+            if (acao === 'pedra') {
+                resultado = 'Você perdeu';
             }
-            if(acao == 'papel'){
+            if (acao === 'papel') {
                 resultado = 'empate';
-            }
-            else{
-                resultado = 'usuario ganhou';
+            } else {
+                resultado = 'Você ganhou';
             }
         }
 
-        if(escolhaComputadorTexto == 'tesoura'){
-            if(acao == 'pedra'){
-                resultado = 'usuario ganhou';
+        if (escolhaComputadorTexto === 'tesoura') {
+            if (acao === 'pedra') {
+                resultado = 'Você ganhou';
             }
-            if(acao == 'papel'){
-                resultado = 'computador ganhou';
-            }
-            else{
+            if (acao === 'papel') {
+                resultado = 'Você perdeu';
+            } else {
                 resultado = 'empate';
             }
         }
@@ -95,8 +92,9 @@ class app3 extends Component {
 
               <View style={styles.palco}>
                 <Text style={styles.txtResultado}>{ this.state.resultado}</Text>
-                <Text>Escolha do Computador: { this.state.escolhaComputador}</Text>
-                <Text>Escolha do Usuário: { this.state.escolhaUsuario}</Text>
+
+                <Icone escolha={ this.state.escolhaComputador} jogador='Computador'></Icone>
+                <Icone escolha={ this.state.escolhaUsuario} jogador='Você'></Icone>
 
               </View>
              
@@ -113,6 +111,43 @@ class Topo extends Component {
                   <Image source={require('./imgs/jokenpo.png')} />
               </View>
         );
+    }
+}
+
+class Icone extends Component {
+
+    render() {
+        if(this.props.escolha == 'pedra'){
+
+            return (
+                <View style={styles.icone}>
+                    <Text style={styles.txtJogador}>{this.props.jogador}</Text>
+                    <Image source={require('./imgs/pedra.png')} />
+                </View>
+            );
+
+        }else if(this.props.escolha == 'papel'){
+
+            return (
+                <View style={styles.icone}>
+                    <Text style={styles.txtJogador}>{this.props.jogador}</Text>
+                    <Image source={require('./imgs/papel.png')} />
+                </View>
+            );
+
+        }else if(this.props.escolha == 'tesoura'){
+
+            return (
+                <View style={styles.icone}>
+                    <Text style={styles.txtJogador}>{this.props.jogador}</Text>
+                    <Image source={require('./imgs/tesoura.png')} />
+                </View>
+            );
+
+        }else{
+            return false;
+        }    
+
     }
 }
 
@@ -134,6 +169,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: 'red'
+    },
+
+    icone: {
+        alignItems: 'center',
+        marginBottom: 20
+    }, 
+    
+    txtJogador: {
+        fontSize: 18
     }
 
 });
